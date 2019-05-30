@@ -1,0 +1,10 @@
+//ここ始めから用意されています
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+//今回、.navbar-laravel の設定が不要のためこれ「import url('https://fonts.googleapis.com/css?family=Nunito');」から上に編集した。
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
