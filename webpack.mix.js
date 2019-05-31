@@ -12,7 +12,9 @@ const mix = require('laravel-mix');
  */
 /*最初のからここ書かれていて。mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');のみだったが、
-    .sass('resources/sass/admin.scss', 'public/css')追加したコンパイルしている*/
+    .sass('resources/sass/admin.scss', 'public/css')追加したコンパイルしている。
+    PHP/Laravel 11.課題6でprofile.scss追加*/
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/admin.scss', 'public/css');
+    .sass('resources/sass/admin.scss', 'public/css')
+    .sass('resources/sass/profile.scss', 'public/css');

@@ -1,19 +1,38 @@
+{{-- layout.blade.phpというファイルを作成し、そこに全てのページに共通する部分を記述し、また各ページごとに異なる部分（コンテンツ）
+をあとで埋め込むように空けておきます。その後、a.blade.phpといったファイルからlayout.blade.phpを呼び出し、空けておいた部分に
+ページのコンテンツを埋め込むことで、完成されたページが出力されます。そうすることで、先程のロゴの修正が発生した場合などは
+layout.blade.phpを編集することで全体が書き換わります。layoutsフォルダにadmin.blade.phpファイルを作り以下書いた。
+｛｛｝｝ についてまず全体として、｛｛｝｝で囲まれたコードは、PHPで書かれた内容を表示するという意味になります。
+より簡単に言えば、｛｛｝｝の中身を文字列に置換し、htmlの中に記載するということです。
+ブラウザの実行はコマンドで $ cd ~/environment/mynews その後 $ npm run watch その後Control + Cで止めて
+、$ php artisan serve --port=8080 を打ちLaravelサーバーを起動し、ブラウザで/admin/news/create にアクセスする--}}
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
+        {{-- --windowsの基本ブラウザであるedgeに対応するという記載。
+        ぶっちゃけとりあえず書く呪文みたいなものという認識でOKです。 --}}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {{-- 画面幅を小さくしたとき、例えばスマートフォンで
+        見たときなどに文字や画像の大きさを調整してくれるタグです。 --}}
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- CSRF Token -->
          {{-- 後の章で説明します --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        {{-- 各ページごとにtitleタグを入れるために@yieldで空けておきます。 --}}
+         {{-- 各ページごとにtitleタグを入れるために@yieldで空けておきます。
+        「@◯◯」という記載のところは、メソッドを読み込んでいます。
+        ＠yield と書かれている箇所が2つありますが、あとから作成するbladeファイルで
+        各＠yieldの中にテキストやコンテンツを埋め込みます。今回であれば、titleというセッションの内容を表示します。
+        上のコメントに書いてある通り、各ページ毎にタイトルを変更できるようにするためです。--}}
         <title>@yield('title')</title>
 
         <!-- Scripts -->
-         {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
+         {{-- Laravel標準で用意されているJavascriptを読み込みます。httpでアクセスしてしまうためcss効かずエラーが出てしまう
+         assetに,trueを付けることでhttpsで接続できるようになる。asset(‘ファイルパス’)は、publicディレクトリの
+        パスを返す関数のことです。要するに、「/js/app.js」というパスを生成します。 --}}
         <script src="{{ asset('js/app.js',true) }}" defer></script>
 
         <!-- Fonts -->
@@ -21,16 +40,19 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
-        {{-- Laravel標準で用意されているCSSを読み込みます --}}
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        {{-- Laravel標準で用意されているCSSを読み込みます。httpでアクセスしてしまうためcss効かずエラーが出てしまう
+         assetに,trueを付けることでhttpsで接続できるようになる --}}
+        <link href="{{ asset('css/app.css',true) }}" rel="stylesheet">
         {{-- この章の後半で作成するCSSを読み込みます --}}
-        <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/admin.css',true) }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
             {{-- 画面上部に表示するナビゲーションバーです。 --}}
             <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
                 <div class="container">
+                     {{-- URLを返すメソッド。これもassetと似たような関数で、configフォルダのapp.phpの中にあるnameに
+                        アクセスをします。基本的にはアプリケーションの名前「Laravel」が格納されています --}}
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>

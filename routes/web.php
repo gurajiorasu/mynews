@@ -35,4 +35,10 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('news/create', 'Admin\NewsController@add');
     Route::get('profile/create', 'Admin\ProfileController@add'); //admin/profile/createにアクセスしたらProfileControllerのadd Actionに。
     Route::get('profile/edit', 'Admin\ProfileController@edit'); //admin/profile/editにアクセスしたらProfileControllerのedit Actionに割り当てる。
+    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');/*ログインしていない状態で管理画面にアクセスしようとしたときに、
+    ログイン画面にリダイレクトするようにRoutingで設定。設定の最後に 「->middleware(‘auth’)」 と入れることで、リダイレクトされるようになります。
+    PHP/Laravel 12*/
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
