@@ -69,6 +69,35 @@ admin.blade.phpからほぼコピペ、43行あたりsecure_asset('css/profile.c
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
+                            {{-- 画面上部のナビゲーションバーにログインリンクやログアウトリンクを設置したいため、以下を追記した。
+                            PHP/Laravel 12.課題1.で書いたlayouts/admin.blade.phpと同じ。--}}
+                        <!-- Authentication Links -->
+                        {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
+                        @guest
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endguest
+                            {{-- 画面上部のナビゲーションバーにログインリンクやログアウトリンクを設置したいため以上までを追 --}}
+                            
+                            
                         </ul>
                     </div>
                 </div>

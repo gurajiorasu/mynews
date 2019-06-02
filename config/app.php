@@ -79,8 +79,9 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
-    'locale' => 'en',
+    
+    // 多言語対応enからjaに変更、コマンドで$ mkdir -p resources/lang/ja と　$ touch resources/lang/ja/messages.phpを実行
+    'locale' => 'ja',
 
     /*
     |--------------------------------------------------------------------------

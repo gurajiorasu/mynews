@@ -1,42 +1,36 @@
+@charset "UTF-8";
 /*コンパイルするcssを用意するために、resources/sass/admin.scss を作成します。コンパイルとは、プログラミング言語で書かれた
 文字列（ソースコード）を、コンピュータ上で実行可能な形式（オブジェクトコード）に変換すること。*/
 body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: #000;
-  color: #fff;
-}
+  color: #fff; }
 
 .navbar-laravel {
   background-color: #000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); }
 
 .navbar-brand {
-  color: #fff !important;
-}
+  color: #fff !important; }
 
 .nav-link {
-  color: #fff !important;
-}
+  color: #fff !important; }
 
 .table-dark {
-  color: #fff;
-}
+  color: #fff; }
 
 .list-group-item {
   border-color: #fff;
-  background-color: #000;
-}
+  background-color: #000; }
 
 .login-box {
-  background-color: rgba(0, 0, 0, 0);
-}
+  background-color: rgba(0, 0, 0, 0); }
 
 .login-header {
-  background-color: rgba(0, 0, 0, 0.25)
-}
+  background-color: rgba(0, 0, 0, 0.25); }
 
 .login-body {
-  background-color: rgba(0, 0, 0, 0.25);
-}
+  background-color: rgba(0, 0, 0, 0.25); }
+
+/*# sourceMappingURL=admin.css.map */
