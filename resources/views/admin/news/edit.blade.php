@@ -1,15 +1,14 @@
-{{-- ここは右クリックで作成PHP/Laravel 16.課題3 投稿したニュースを更新/削除しよう。news/edit.blade.php
-を参考に作成--}}
+{{-- ここは右クリックで作成PHP/Laravel 16 投稿したニュースを更新/削除しよう --}}
 @extends('layouts.admin')
-@section('title', 'プロフィールページ')
+@section('title', 'ニュースの編集')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>プロフィール編集</h2>
-                {{-- Admin\ProfileController@updateはformの送信先 --}}
-                <form action="{{ action('Admin\ProfileController@update') }}" method="post" enctype="multipart/form-data">
+                <h2>ニュース編集</h2>
+                {{-- Admin\NewsController@updateはformの送信先 --}}
+                <form action="{{ action('Admin\NewsController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -18,27 +17,15 @@
                         </ul>
                     @endif
                     <div class="form-group row">
-                        <label class="col-md-2" for="title">氏名</label>
+                        <label class="col-md-2" for="title">タイトル</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ $news_form->name }}">
+                            <input type="text" class="form-control" name="title" value="{{ $news_form->title }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="body">性別</label>
+                        <label class="col-md-2" for="body">本文</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="gender" rows="20">{{ $news_form->gender }}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2" for="body">趣味</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" name="hobby" rows="20">{{ $news_form->hobby }}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2" for="body">自己紹介欄</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="20">{{ $news_form->introduction }}</textarea>
+                            <textarea class="form-control" name="body" rows="20">{{ $news_form->body }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -63,6 +50,24 @@
                         </div>
                     </div>
                 </form>
+                {{-- PHP/Laravel 17 編集履歴を実装しようで以下を追記。
+                記録した変更履歴を編集画面で参照できるようにedit.blade.php を編集。
+                編集履歴が表示されるよう実装しました。Controllerで生成した Member モデルが histories を持っているか
+                確認します。つまり、編集履歴があるかどうか確認します。もし編集履歴があるならば、@foreach で一つ一つの
+                履歴を表示します。Laravelサーバーで確認--}}
+                <div class="row mt-5">
+                    <div class="col-md-4 mx-auto">
+                        <h2>編集履歴</h2>
+                        <ul class="list-group">
+                            @if ($news_form->histories != NULL)
+                                @foreach ($news_form->histories as $history)
+                                    <li class="list-group-item">{{ $history->edited_at }}</li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

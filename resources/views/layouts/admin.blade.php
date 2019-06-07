@@ -26,7 +26,8 @@ layout.blade.phpを編集することで全体が書き換わります。layouts
         「@◯◯」という記載のところは、メソッドを読み込んでいます。
         ＠yield と書かれている箇所が2つありますが、あとから作成するbladeファイルで
         各＠yieldの中にテキストやコンテンツを埋め込みます。今回であれば、titleというセッションの内容を表示します。
-        上のコメントに書いてある通り、各ページ毎にタイトルを変更できるようにするためです。--}}
+        上のコメントに書いてある通り、各ページ毎にタイトルを変更できるようにするためです。
+        --}}
         <title>@yield('title')</title>
 
         <!-- Scripts -->
@@ -56,10 +57,11 @@ layout.blade.phpを編集することで全体が書き換わります。layouts
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    {{-- ボタンはHTMLで書いてる --}}
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
+                    {{-- idは1つclassは複数でOKわけるためにある --}}
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
@@ -80,14 +82,14 @@ layout.blade.phpを編集することで全体が書き換わります。layouts
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
+                                {{-- ログアウトボタン表示 --}}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+                                    {{-- methodは通信形式基本はgetはユーザー見える、posはユーザーに見えないように渡す --}}
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -100,15 +102,10 @@ layout.blade.phpを編集することで全体が書き換わります。layouts
                 </div>
             </nav>
             {{-- ここまでナビゲーションバー --}}
-            
-
-                        
-                        
-            
-            
 
             <main class="py-4">
-                {{-- コンテンツをここに入れるため、@yieldで空けておきます。 --}}
+                {{-- コンテンツをここに入れるため、@yieldで空けておきます。news/create.blade.phpや
+                profile/create.blade.phpなどに読まれる --}}
                 @yield('content')
             </main>
             

@@ -105,7 +105,7 @@ admin.blade.phpからほぼコピペ、43行あたりsecure_asset('css/profile.c
             {{-- ここまでナビゲーションバー --}}
 
             <main class="py-4">
-                {{-- コンテンツをここに入れるため、@yieldで空けておきます。 --}}
+                {{-- コンテンツをここに入れるため、@yieldで空けておきます。news/create.blade.phpに読まれる --}}
                 @yield('content')
             </main>
         </div>
