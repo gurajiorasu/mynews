@@ -11,6 +11,8 @@ use App\News;
 use App\History;
 //PHP/Laravel 17で追加。意味は？
 use Carbon\Carbon;
+//PHP/Laravelコース - Herokuへの画像のアップロードで追加。imageの保存をAWSのS3になるよう変更していきましょう。
+use Storage;
 
 class NewsController extends Controller
 {
@@ -39,8 +41,11 @@ class NewsController extends Controller
 
       // フォームから画像が送信されてきたら、保存して、$news->image_path に画像のパスを保存する
       if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $news->image_path = basename($path);
+        /*$path = $request->file('image')->store('public/image');
+        $news->image_path = basename($path);　この2行分を消して以下の2行のように画像の保存先をS3に変更するため
+        編集。*/
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $news->image_path = Storage::disk('s3')->url($path);
       } else {
           $news->image_path = null;
       }
@@ -113,8 +118,11 @@ class NewsController extends Controller
       $news_form = $request->all();
       //以下のif文書かないと実は画像を変更した時にエラーになってしまうという。
       if (isset($news_form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $news->image_path = basename($path);
+        /*$path = $request->file('image')->store('public/image');
+        $news->image_path = basename($path);　この2行分を消して以下の2行のように画像の保存先をS3に変更するため
+        編集。*/
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $news->image_path = Storage::disk('s3')->url($path);
         unset($news_form['image']);
       } elseif (isset($request->remove)) {
         $news->image_path = null;
