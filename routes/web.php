@@ -44,10 +44,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth'); //PHP/Laravel 16 追記
     Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth'); //PHP/Laravel 16 追記
     Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth'); //PHP/Laravel 16 追記
-    Route::get('profile/create', 'Admin\ProfileController@add');
+    Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
     /* admin/profile/createにアクセスしたらControllersのProfileControllerのadd Actionに。
     ここのmiddleware(下に説明書いてる)はPHP/Laravel 12の課題.2で追加した。*/
-    Route::post('profile/create', 'Admin\ProfileController@create'); /*PHP/Laravel 13.課題3 admin/profile/create に 
+    Route::post('profile/create', 'Admin\ProfileController@create')->middleware('auth'); /*PHP/Laravel 13.課題3 admin/profile/create に 
     postメソッドでアクセスしたら ProfileController の create Action に割り当てる*/
     Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth'); /*admin/profile/editにアクセスしたら
     ControllersのProfileControllerのedit Actionに割り当てる。上同様同じくここのmiddleware(下に説明書いてる)はPHP/Laravel 12の課題.3で追加した*/
@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');/*ログインしていない状態で管理画面にアクセスしようとしたときに、
     ログイン画面にリダイレクトするようにRoutingで設定。設定の最後に 「->middleware(‘auth’)」 と入れることで、リダイレクトされるようになります。
     PHP/Laravel 12の講義*/
+    Route::get('/', 'NewsController@index')->middleware('auth'); //PHP/Laravel 18
     
     
 });

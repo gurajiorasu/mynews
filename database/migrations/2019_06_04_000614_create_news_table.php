@@ -21,7 +21,8 @@ class CreateNewsTable extends Migration
     public function up()
     {
         Schema::create('news', function (Blueprint $table) {
-            /*中にあったbigIncrements('id');はbigを消してincrementsにした。timestamps();は元々あり、titleとbodyとimage_pathを追記、
+            /*中にあったbigIncrements('id');はbigを消してincrementsにしたがbigIncrementsでも大丈夫。
+            timestamps();は元々あり、titleとbodyとimage_pathを追記、
             PHP/Laravel.14。関数upには、マイグレーション実行時のコードを書きますここでは、id(主キー)、title、body、image_path、
             timestampsの５つのカラムを持つ、newsというテーブルを作成しています。image_pathの右側にある、->nullable()という記述は
             、画像のパスは空でも保存できます、という意味です。つまり、他の４つは全て、保存時に必ず値が入るカラムに設定される、
@@ -32,12 +33,16 @@ class CreateNewsTable extends Migration
             ●補足、テーブル名やカラム名、データ型などが間違っていても、あわてることはありません。直前のマイグレーション操作を
             取り消すことができます。これをロールバックと言います $ php artisan migrate:rollback。
             newsテーブルが作成される前の状態に戻りました。ここで先ほどのマイグレーションファイルに修正がある場合は正しく改修
-            して、マイグレーションを再実行して下さい。*/
+            して、マイグレーションを再実行して下さい。
+            またmigtationsフォルダのファイル修正した場合はrollbackして毎回$ php artisan migrateを打たないとダメ。
+            詳しくはスクリーンショット。*/
+            //主キー同じ値にならない、各データ、それぞれを識別するためのデータ。必ず必要でおもに('id')になる。
             $table->increments('id');
             $table->string('title'); // ニュースのタイトルを保存するカラム
             $table->string('body');  // ニュースの本文を保存するカラム
             $table->string('image_path')->nullable();  /*画像のパスを保存するカラム、nullable()という記述は、画像のパスは
             空でも保存できます、という意味*/
+            //日時が入るカラム、基本的に入れる。自動で作成される。
             $table->timestamps();
         });
     }

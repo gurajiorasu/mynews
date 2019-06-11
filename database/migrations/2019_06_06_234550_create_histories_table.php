@@ -3,8 +3,9 @@
 編集画面でデータを更新するタイミングで histories というテーブルにデータを登録し、編集画面でその一覧を見られるように実装します。
 ここでは編集履歴テーブルの作成と関連付けをする。
 以下編集したらMigrationを実行しますコマンド$php artisan migrate 。
-次にやるのはコマンド$php artisan make:model Historyで作成されたapp/Providers/History.php編集
--->
+次にやるのはコマンド$php artisan make:model Historyで作成されたapp/Providers/History.php編集。
+profile用のhistoriesを作る場合は別テーブルを新たに作成する。historyテーブルはあくまでnewsの変更履歴の
+情報を扱うものなので、別の用途での使用はだめで、今回はprofile_historiesとして作成した。-->
 <?php
 
 use Illuminate\Support\Facades\Schema;

@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-// 以下を追記することでNews Model(News.php)が扱えるようになる
+// 以下を追記することでNews Model(News.php)クラスが扱えるようになる
 use App\News;
 //History.php モデルの使用を宣言するため、同様に追記して下さい。PHP/Laravel 17で追加。
 use App\History;
-//PHP/Laravel 17で追加。意味は？
+//PHP/Laravel 17で追加。タイムスタンプを使うCarbonはモデル、モデルを使う時は宣言が必要
 use Carbon\Carbon;
 //PHP/Laravelコース - Herokuへの画像のアップロードで追加。imageの保存をAWSのS3になるよう変更していきましょう。
 use Storage;

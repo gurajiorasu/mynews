@@ -16,13 +16,14 @@ class CreateProfilesTable extends Migration
     {
         /*以下はPHP/Laravel 14.課題4で作成。Schema::create('profiles',は自動でprofilesになった。
         おそらくコマンドでcreate_profiles_table打ったから、↑にコマンド書いてる。
+        incrementsからbigIncrementsにしたがどちらでも大丈夫。
         reate_profiles_table というMigrationの雛形ファイルを作成し、 profilesというテーブル名で名前(name)、
         性別(gender)、趣味(hobby)、自己紹介(introduction)を保存できるように修正して、 migrateしてテーブルを作成する*/
         Schema::create('profiles', function (Blueprint $table) {
-            
+            $table->increments('id');
             $table->string('name');  // プロフィールの名前(name)を保存するカラム
             $table->string('gender');  // プロフィールの性別(gender)を保存するカラム
-            $table->string('hobby)');  // プロフィールの趣味(hobby)を保存するカラム
+            $table->string('hobby');  // プロフィールの趣味(hobby)を保存するカラム
             $table->string('introduction'); // プロフィールの自己紹介(introduction)を保存するカラム
             $table->string('image_path')->nullable(); /*画像のパスを保存するカラム、nullable()という記述は、画像のパスは
             空でも保存できます、という意味*/

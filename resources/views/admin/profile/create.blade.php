@@ -61,7 +61,7 @@ views/admin/news/create.blade.phpを参考にする。--}}
                         <label class="col-md-2" for="introduction">自己紹介欄</label>
                         <div class="col-md-10">
                             {{-- textareaは複数行のテキスト入力欄を作成する(htmlタグ)。rowsは入力欄の高さを行数で指定(htmlタグ) --}}
-                            <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="10">{{ old('introduction') }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">

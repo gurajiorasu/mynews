@@ -1,3 +1,8 @@
+@charset "UTF-8";
+
+/*コンパイルするcssを用意するために、resources/sass/admin.scss を作成します。コンパイルとは、プログラミング言語で書かれた
+文字列（ソースコード）を、コンピュータ上で実行可能な形式（オブジェクトコード）に変換すること。*/
+
 body {
   background-repeat: no-repeat;
   background-position: center;
