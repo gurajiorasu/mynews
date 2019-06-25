@@ -75,7 +75,7 @@ class NewsController extends Controller
         } else {
             $headline = null;
         }
-
+        $posts = Profile::all()->sortByDesc('updated_at');
         // proflie/index.blade.php ファイルを渡している
         // また View テンプレートに headline、 posts、 cond_title という変数を渡している
         return view('news.profile', ['headline' => $headline, 'posts' => $posts, 'cond_title' => $cond_title]);
