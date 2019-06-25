@@ -23,7 +23,7 @@ class Profile extends Model
     アクセスすることができます。次にやるのはNewsController の update Action編集*/
     public function histories()
     {
-      return $this->hasMany('App\Profile_History');
+      return $this->hasMany('App\ProfileHistory');
 
     }
     

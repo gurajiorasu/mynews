@@ -1,5 +1,5 @@
 <!--PHP/Laravel 17 編集履歴を実装しようで作成。コマンド$ php artisan make:migration create_histories_table でこのファイル作成
-編集履歴は、特定のニュースをいつ変更したか、日付と時刻を記録し、参照することができる機能です。
+編集履歴(編集した時に下に出るやつ)は、特定のニュースをいつ変更したか、日付と時刻を記録し、参照することができる機能です。
 編集画面でデータを更新するタイミングで histories というテーブルにデータを登録し、編集画面でその一覧を見られるように実装します。
 ここでは編集履歴テーブルの作成と関連付けをする。
 以下編集したらMigrationを実行しますコマンド$php artisan migrate 。
@@ -21,7 +21,9 @@ class CreateHistoriesTable extends Migration
      */
     public function up()
     {
-        /*以下編集したtable->bigIncrementsをincrementsにし、integer('news_id')とstring('edited_at')を追加した*/
+        /*以下編集したtable->bigIncrementsをincrementsにし、integer('news_id')とstring('edited_at')を追加した。
+        ここのcreate_histories_table.phpとapp/History.phpとNewsController(update Action)とid、news_id、edited_at
+        は繋がってる。ちなみにcreate_news_table-の場合はNewsControllerと繋がってない*/
         Schema::create('histories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('news_id');

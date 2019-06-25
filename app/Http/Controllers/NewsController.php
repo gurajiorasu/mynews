@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\HTML;
 
 //追記
 use App\News;
+//
+use App\Profile;
 
 class NewsController extends Controller
 {
@@ -27,7 +29,8 @@ class NewsController extends Controller
             /*News::all()はEloquentを使った、全てのnewsテーブルを取得するというメソッドです。
             次のsortByDesc()というメソッドは？これは、カッコの中の値（キー）でソートするためのメソッドになります。
             ちなみに、ソートとは並び替えることを意味します。ソートするためのメソッドは、次のような意味になります。
-            sortBy(‘xxx’)：xxxで昇順に並べ換える。sortByDesc(‘xxx’)：xxxで降順に並べ換える。
+            sortBy(‘xxx’)：xxxで昇順に並べ換える。
+            sortByDesc(‘xxx’)：xxxで降順に並べ換える。
             つまり、News::all()->sortByDesc('updated_at')は、「投稿日時順に新しい方から並べる」
             という並べ換えをしていることを意味しています。*/
             $posts = News::all()->sortByDesc('updated_at');
@@ -54,4 +57,29 @@ class NewsController extends Controller
         最新の記事とそれ以外の記事とで表記を変えたいために行なっています。*/
         return view('news.index', ['headline' => $headline, 'posts' => $posts, 'cond_title' => $cond_title]);
     }
+    
+    
+    //PHP/Laravel 18課題で追加
+    public function profile(Request $request)
+    {
+        $cond_title = $request->cond_title;
+        // $cond_title が空白でない場合は、記事を検索して取得する
+        if ($cond_title != '') {
+            $posts = Profile::where('title', $cond_title).orderBy('updated_at', 'desc')->get();
+        } else {
+            $posts = Profile::all()->sortByDesc('updated_at');
+        }
+
+        if (count($posts) > 0) {
+            $headline = $posts->shift();
+        } else {
+            $headline = null;
+        }
+
+        // proflie/index.blade.php ファイルを渡している
+        // また View テンプレートに headline、 posts、 cond_title という変数を渡している
+        return view('news.profile', ['headline' => $headline, 'posts' => $posts, 'cond_title' => $cond_title]);
+    }
+    
+    
 }

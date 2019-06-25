@@ -4,8 +4,6 @@
 http://XXXXXX.jp/login などや http://XXXXXX.jp/about　など 。
 アクセスしたアドレスに応じて対応するControllerのActionを呼び出す仕組みのことをRoutingといいます。*/
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,19 +29,21 @@ Routingの設定に[‘prefix’ => ‘admin’]を適用させている、と�
 ります。Route::get(‘news/create’, ‘Admin\NewsController@add’); が肝心要の設定で、http://XXXXXX.jp/admin/news/create に
 アクセスが来たら、Controller Admin\NewsController のAction addに渡す いう設定をしています。
 PHP/Laravel 13 ニュース投稿画面を作成でRoute::group(['prefix' => 'admin'], function()から
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()に変更した*/
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()に変更した
+配列は単体('prefix' => 'admin'のみなど)の場合でも用いられます。ちなみに、Route::groupで使用しているのは連想配列になる*/
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
-    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth'); //middleware説明は下に書いてある
     Route::post('news/create', 'Admin\NewsController@create')->middleware('auth');/*admin/news/createにアクセスしたときに、getとpostの両方が
     設定されています。getの場合は add Actionを、 postの場合は create Action を呼び出すようにしています。
     これは通常のページの表示にはgetを受け取り、フォームを送信したときに受け取る場合にはpostを受け取るように指定しています。
     (Admin/ProfileControlleにadd & create Actionある)
-    methodは通信形式基本はgetはユーザー見える、posはユーザーに見えないように渡す*/
+    methodは通信形式基本はgetはユーザー見える、postはユーザーに見えないように渡す。*/
     Route::get('news', 'Admin\NewsController@index')->middleware('auth'); //PHP/Laravel 15で追加
     Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth'); //PHP/Laravel 16 追記
     Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth'); //PHP/Laravel 16 追記
     Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth'); //PHP/Laravel 16 追記
+    Route::get('profile', 'Admin\ProfileController@index')->middleware('auth');
     Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
     /* admin/profile/createにアクセスしたらControllersのProfileControllerのadd Actionに。
     ここのmiddleware(下に説明書いてる)はPHP/Laravel 12の課題.2で追加した。*/
@@ -53,13 +53,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     ControllersのProfileControllerのedit Actionに割り当てる。上同様同じくここのmiddleware(下に説明書いてる)はPHP/Laravel 12の課題.3で追加した*/
     Route::post('profile/edit', 'Admin\ProfileController@update')->middleware('auth'); /*PHP/Laravel 13.課題6 admin/profile/edit
     に postメソッドでアクセスしたら ProfileController の update Action に割り当てるように設定*/
+    Route::get('profile/delete', 'Admin\ProfileController@delete')->middleware('auth');
     Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');/*ログインしていない状態で管理画面にアクセスしようとしたときに、
     ログイン画面にリダイレクトするようにRoutingで設定。設定の最後に 「->middleware(‘auth’)」 と入れることで、リダイレクトされるようになります。
     PHP/Laravel 12の講義*/
-    Route::get('/', 'NewsController@index')->middleware('auth'); //PHP/Laravel 18
     
     
 });
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+//上の書き方はグループ化しているが以下の書き方は上(admin/)と同じ設定でgroupを使用しなくても次のように書くこともできる
+Route::get('/home', 'HomeController@index')->name('home');//これどこで書いた？
+Route::get('/', 'NewsController@index'); //PHP/Laravel 18　一般ユーザーがニュースを読むためのフロント部分
+Route::get('/profile', 'NewsController@profile'); //PHP/Laravel 18課題

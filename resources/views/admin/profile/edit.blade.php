@@ -1,7 +1,7 @@
 {{-- ここは右クリックで作成PHP/Laravel 16.課題3 投稿したニュースを更新/削除しよう。profile/edit.blade.php
 を参考に作成。
 edit（編集画面）のURLを確認する場合、admin/profile/edit?id=2 などでid変えて確認できる--}}
-@extends('layouts.admin')
+@extends('layouts.profile')
 @section('title', 'プロフィールページ')
 
 @section('content')
@@ -69,11 +69,11 @@ edit（編集画面）のURLを確認する場合、admin/profile/edit?id=2 な�
                     <div class="col-md-4 mx-auto">
                         <h2>編集履歴</h2>
                         <ul class="list-group">
-                            <!--@if ($profile_form->histories != NULL)-->
-                            <!--    @foreach ($profile_form->histories as $history)-->
-                            <!--        <li class="list-group-item">{{ $history->edited_at }}</li>-->
-                            <!--    @endforeach-->
-                            <!--@endif-->
+                            @if ($profile_form->histories != NULL)
+                                @foreach ($profile_form->histories as $history)
+                                    <li class="list-group-item">{{ $history->edited_at }}</li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>

@@ -33,14 +33,14 @@ class CreateNewsTable extends Migration
             ●補足、テーブル名やカラム名、データ型などが間違っていても、あわてることはありません。直前のマイグレーション操作を
             取り消すことができます。これをロールバックと言います $ php artisan migrate:rollback。
             newsテーブルが作成される前の状態に戻りました。ここで先ほどのマイグレーションファイルに修正がある場合は正しく改修
-            して、マイグレーションを再実行して下さい。
-            またmigtationsフォルダのファイル修正した場合はrollbackして毎回$ php artisan migrateを打たないとダメ。
-            詳しくはスクリーンショット。*/
-            //主キー同じ値にならない、各データ、それぞれを識別するためのデータ。必ず必要でおもに('id')になる。
-            $table->increments('id');
-            $table->string('title'); // ニュースのタイトルを保存するカラム
-            $table->string('body');  // ニュースの本文を保存するカラム
-            $table->string('image_path')->nullable();  /*画像のパスを保存するカラム、nullable()という記述は、画像のパスは
+            して、マイグレーションを再実行して下さい。(migtationsフォルダのファイル修正した場合はrollbackして
+            毎回$ php artisan migrateを打たないとダメ。詳しくはスクリーンショット。)*/
+            $table->increments('id');//主キー同じ値にならない、各データ、それぞれを識別するためのデータ。必ず必要でおもに('id')になる。
+            $table->string('title'); // ニュースのタイトルを保存するカラム(列又はデータベースに入っているデータの項目)
+            $table->string('body');  /* ニュースの本文を保存するカラム。app/News.phpと
+            resources/lang/ja/validation.php(一応だが日本語化した場所)とid、title、body繋がってる！*/
+            $table->string('image_path')->nullable(); 
+            /*画像のパスを保存するカラム、nullable()という記述は、画像のパスは
             空でも保存できます、という意味*/
             //日時が入るカラム、基本的に入れる。自動で作成される。
             $table->timestamps();

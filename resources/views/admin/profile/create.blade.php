@@ -1,6 +1,6 @@
 {{--PHP/Laravel 11.課題4.create.blade.php ファイルを作成し、3. で作成した profile.blade.phpファイルを読み込み、
 また プロフィールのページであることがわかるように titleとcontentを編集しましょう。
-views/admin/news/create.blade.phpを参考にする。--}}
+views/admin/news/create.blade.phpを参考にする。layoutsのprofile.blade.phpをよんでる--}}
 @extends('layouts.profile')
 
 
@@ -21,9 +21,9 @@ views/admin/news/create.blade.phpを参考にする。--}}
                 {{-- formはPHP/Laravel 13課題4で追加。admin/news/create.blade.phpを参考にした。 --}}
                 {{-- formの送信先(＜form action=”この部分”＞)を、 Admin\ProfileController の create Action に指定した --}}
                 <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-data">
-                    {{-- count($errors)$errors` は `validate` で弾かれた内容を記憶する配列のことでしたね。
+                    {{-- 以下のcount($errors)$errors` は `validate` で弾かれた内容を記憶する配列のことでしたね。
                     countメソッドは配列の個数を返すメソッドになっています。
-                    もし、エラーがなければ$errorsはnullを返すのでcount($errors)は0を返します。
+                    もし、エラーがなければ$errorsはnull(値に何もない)を返すのでcount($errors)は0を返します。
                     バリデーションでエラーを見つけたときには、Laravel が自動的に $errors という変数にエラーを
                     格納します。$errors は配列で、その要素がある場合はエラーと見なし、エラーメッセージを表示します--}}
                     @if (count($errors) > 0)

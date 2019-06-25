@@ -10,16 +10,18 @@ class News extends Model
     /*以下をValidation追加した。PHP/Laravel 14。Modelでデータを保存する前に、フォームからデータを送信されてきた値が正しいかどうか
     確認が必要な場合があります。例えば、ニュースへ追加するときに、タイトルが入力されていなかった場合は不完全なデータを
     登録してしまいます。このようなデータの不備をあらかじめ防ぐために検証する仕組みがバリデーションです。
-    Validationを設定するにはたくさんの方法がありますが、今回はModelに定義。バリデーションでデータが異常であることを見つけたとき
+    Validationを設定するにはたくさんの方法がありますが、今回はModelに定義。以下でバリデーションでデータが異常であることを見つけたとき
     には、データを保存せずに入力フォームへ戻すようにします。戻った先の画面では、データを登録できなかった理由を表示する。
-    admin/news/create.blade.php を再度確認*/
-    protected $guarded = array('id');
+    admin/news/create.blade.php を再度確認
+    ここNews.phpと、create_news_tableと、create.blade.phpと、validation.php(一応日本語化のため)繋がってる。*/
+    protected $guarded = array('id'); //arrayは配列になる
      public static $rules = array(
         'title' => 'required',
         'body' => 'required',
+        //ここにcreate_histories_table.phpのnews_idやedited_atを記載しないのでおそらくフォームがないため「入力フォームへ戻す」がいらない
     );
     
-    /* PHP/Laravel 17 編集履歴を実装しようで以下を追記。Newsモデルに関連付けを行う(app/History.php)。
+    /* PHP/Laravel 17 編集履歴を実装しようで以下を追記。Newsモデルに関連付けを行う(app/History.php)ため書く。
     News モデルに関連付けを定義することで、News モデルから $news->histories() のような記述で簡単に
     アクセスすることができます。次にやるのはNewsController の update Action編集*/
     public function histories()

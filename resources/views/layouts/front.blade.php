@@ -42,7 +42,7 @@
         <link href="{{ asset('css/app.css',true) }}" rel="stylesheet">
         {{-- PHP/Laravel 18で追加CSSを読み込みます。{{ asset('css/admin.css') }}はadmin.blade.phpではあったが
         ここでは削除して以下を記載した--}}
-        <link href="{{ asset('css/front.css,true') }}" rel="stylesheet">
+        <link href="{{ asset('css/front.css',true) }}" rel="stylesheet">
         
     </head>
     <body>

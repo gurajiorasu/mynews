@@ -17,6 +17,11 @@
                         </ul>
                     @endif
                     <div class="form-group row">
+                        {{--＜LABEL＞タグはフォームの構成部品（一行テキストボックス・チェックボックス・ラジオボタン等）と、
+                        その項目名（ラベル）を明確に関連付けるための要素で、＜label for="id属性値"＞で使う。
+                        関連付けを行うことにより、ブラウザでラベル（もしくはラベルのアクセスキー）をクリックした際に、
+                        その構成部品をクリックしたのと同じ動作が可能になります。おそらくfor="title"以下の"body"は
+                        2019~create_news_table.phpとapp/News.phpと一応だが日本語化した場所resources/lang/ja/validation.phpと繋がってる--}}
                         <label class="col-md-2" for="title">タイトル</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="title" value="{{ $news_form->title }}">

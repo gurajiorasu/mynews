@@ -1,10 +1,5 @@
-{{-- ここはPHP/Laravel 18で作成。コマンド $ mkdir resources/views/news 作成後に
-index.blade.phpを作成した。ここのnewsフォルダは一般ユーザーがニュースを読むためのフロント部分で、
-上のフォルダのnewsは投稿者用になり、上のフォルダを見るとadmin(投稿者)の中のnewsにindex.blade.phpがある。
-つまり上はviews/admin/news/index.blade.phpでここは、views/news/index.blade.phpになる。
-次はroutes/web.php、ルーティンの設定。
-その次は画像の設置場所をLaravelに教えるために次のコマンドを入力します $ php artisan storage:link --}}
-@extends('layouts.front')
+{{-- PHP/Laravel 18課題で追加　一般ユーザー用(閲覧者用)のフロント部分 --}}
+@extends('layouts.frontprofile')
 
 @section('content')
     <div class="container">
@@ -65,6 +60,9 @@ index.blade.phpを作成した。ここのnewsフォルダは一般ユーザー�
                                 </div>
                                 <div class="body mt-3">
                                     {{ str_limit($post->body, 1500) }}
+                                </div>
+                                <div class="title">
+                                    {{ str_limit($post->title, 150) }}
                                 </div>
                             </div>
                             <div class="image col-md-6 text-right mt-4">

@@ -10,7 +10,7 @@ class History extends Model
     登録してしまいます。このようなデータの不備をあらかじめ防ぐために検証する仕組みがバリデーションです。
     News Modelとの関連を定義するために、app/News.php も追記する。
     次にやるのはapp/News.phpの追記*/
-    protected $guarded = array('id');
+    protected $guarded = array('id'); //arrayは配列になる
 
     public static $rules = array(
         'news_id' => 'required',

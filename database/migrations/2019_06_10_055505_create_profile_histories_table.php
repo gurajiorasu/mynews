@@ -20,7 +20,7 @@ class CreateProfileHistoriesTable extends Migration
         //create(profile_historiesは自動で付いた
         Schema::create('profile_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('profile_id');
+            $table->integer('prodile_id');
             $table->string('edited_at');
             $table->timestamps();
         });

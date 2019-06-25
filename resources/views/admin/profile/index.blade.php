@@ -1,21 +1,21 @@
 {{-- ここはViewを実装するため右クリックでファイル作成した、PHP/Laravel 15 --}}
-@extends('layouts.admin')
-@section('title', '登録済みニュースの一覧')
+@extends('layouts.profile')
+@section('title', '登録済みプロフィール一覧')
 
 @section('content')
     <div class="container">
         <div class="row">
-            <h2>ニュース一覧</h2>
+            <h2>プロフィール一覧</h2>
         </div>
         <div class="row">
             <div class="col-md-4">
                 {{-- 新規作成クリックでAdmin\NewsControllerのアクションaddにいく。また実際のHPで新規作成クリックで
                 admin/news/createページに飛ぶ--}}
-                <a href="{{ action('Admin\NewsController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+                <a href="{{ action('Admin\ProfileController@add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
             <div class="col-md-8">
                 {{-- Admin\NewsController@indexはformの送信先 --}}
-                <form action="{{ action('Admin\NewsController@index') }}" method="get">
+                <form action="{{ action('Admin\ProfileController@index') }}" method="get">
                     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
                         <div class="col-md-8">
@@ -56,11 +56,13 @@
                             データの一つ一つを処理し、各データの id と名前、メールアドレスを表示しています。
                             Bladeテンプレートで配列のループを使用したい時は＠foreachを使いループでキーを使用する事が出来ます。
                             ＠foreach は PHP の foreach ではなく blade の構文ですが、使用方法に大きな差はありません。--}}
-                            @foreach($posts as $news)
+                            @foreach($posts as $profile)
                                 <tr>
-                                    <th>{{ $news->id }}</th>
-                                    <td>{{ str_limit($news->title, 100) }}</td>
-                                    <td>{{ str_limit($news->body, 250) }}</td>
+                                    <th>{{ $profile->id }}</th>
+                                    <td>{{ str_limit($profile->name, 100) }}</td>
+                                    <td>{{ str_limit($profile->gender, 100) }}</td>
+                                    <td>{{ str_limit($profile->hobby, 100) }}</td>
+                                    <td>{{ str_limit($profile->introduction, 250) }}</td>
                                     {{--編集リンク＆削除リンクを表示するように追加＜td＞から＜/td＞まで、PHP/Laravel 16 --}}
                                     <td>
                                         <div>
@@ -71,10 +73,10 @@
                                             ダブルアロー演算子は変数に対する値を表します。つまり、`['id' => $news->id]`はidに対する値は
                                             $news->idである、となります。一方、アロー演算子はオブジェクトが持つパラメータやメソッドに
                                             アクセスする際に使用されます。｀$news->id｀は$newsがもつidにアクセスします。--}}
-                                            <a href="{{ action('Admin\NewsController@edit', ['id' => $news->id]) }}">編集</a>
+                                            <a href="{{ action('Admin\ProfileController@edit', ['id' => $profile->id]) }}">編集</a>
                                         </div>
                                         <div>
-                                            <a href="{{ action('Admin\NewsController@delete', ['id' => $news->id]) }}">削除</a>
+                                            <a href="{{ action('Admin\ProfileController@delete', ['id' => $profile->id]) }}">削除</a>
                                         </div>
                                     </td>
                                 </tr>
